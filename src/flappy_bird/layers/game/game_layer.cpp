@@ -49,11 +49,12 @@ bool GameLayer::on_key_pressed(nl::KeyPressedEvent& e) {
   if (e.is_repeating())
     return false;
 
+  auto& app = nl::Application::get();
   if (e.get_key() == nl::Key::R) {
-    nl::Application::get().get_settings_manager().reload_scene = true;
+    app.get_settings_manager().reload_scene = true;
     return true;
   } else if (e.get_key() == nl::Key::P) {
-    nl::Application::get().get_states_manager().enable_overlay("pause_overlay");
+    app.get_states_manager().enable_overlay("pause_overlay");
     return true;
   }
 

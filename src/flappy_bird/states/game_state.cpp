@@ -29,12 +29,13 @@ GameState::GameState() : State("game_state") {}
 void GameState::on_attach() {
   auto& app = nl::Application::get();
   auto& scene_manager = app.get_scene_manager();
+  auto& states_manager = app.get_states_manager();
+
   scene_manager.register_system("delete_system",
                                 std::make_unique<nl::DeleteSystem>(-100));
   scene_manager.register_system("render_system",
                                 std::make_unique<nl::RenderSystem>(100));
 
-  auto& states_manager = nl::Application::get().get_states_manager();
   states_manager.push_layer(GameLayer::create());
   states_manager.push_overlay(ReadyOverlay::create(), true);
   states_manager.push_overlay(PauseOverlay::create(), false);
@@ -49,16 +50,13 @@ void GameState::on_attach() {
 
 void GameState::on_detach() {
   auto& app = nl::Application::get();
-  const auto& settings_manager = app.get_settings_manager();
-  auto& scene_manager = app.get_scene_manager();
-  const auto& asset_manager = app.get_assets_manager();
 
   APP_INFO("saving settings...");
-  nl::save_settings(settings_manager,
+  nl::save_settings(app.get_settings_manager(),
                     nl::get_default_roaming_path("FlappyBird"));
 
   // TODO clear entities from systems and time?
-  scene_manager.clear_systems();
+  app.get_scene_manager().clear_systems();
 }
 
 void GameState::on_update(const nl::Time& ts) {

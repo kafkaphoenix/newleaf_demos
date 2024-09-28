@@ -54,19 +54,19 @@ inline bool on_key_pressed(nl::KeyPressedEvent& e) {
       windows_manager.restore_cursor();
       windows_manager.update_camera_position(true);
       windows_manager.set_last_mouse_position(nl::Input::get_mouse_x(),
-                                               nl::Input::get_mouse_y());
-      if (nl::Application::get().should_restore_pause()) {
-        nl::Application::get().pause(true);
-        nl::Application::get().restore_pause(false);
+                                              nl::Input::get_mouse_y());
+      if (app.should_restore_pause()) {
+        app.pause(true);
+        app.restore_pause(false);
       } else {
-        nl::Application::get().pause(false);
+        app.pause(false);
       }
     } else {
       app.debug(true);
-      if (nl::Application::get().is_paused()) {
-        nl::Application::get().restore_pause(true);
+      if (app.is_paused()) {
+        app.restore_pause(true);
       } else {
-        nl::Application::get().pause(true);
+        app.pause(true);
       }
       glfwSetCursor(windows_manager.get_native_window(), nullptr);
       windows_manager.set_cursor_mode(nl::CursorMode::normal, false);
@@ -120,7 +120,7 @@ inline bool on_key_released(nl::KeyReleasedEvent& e) {
   if (e.get_key() == nl::Key::LeftAlt and not app.is_debugging()) {
     auto& windows_manager = app.get_windows_manager();
     windows_manager.set_last_mouse_position(nl::Input::get_mouse_x(),
-                                             nl::Input::get_mouse_y());
+                                            nl::Input::get_mouse_y());
     windows_manager.update_camera_position(true);
     windows_manager.restore_cursor();
     return true;

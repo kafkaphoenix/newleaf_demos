@@ -7,6 +7,7 @@
 #include <newleaf/components/physics/cCollider.h>
 #include <newleaf/components/physics/cTransform.h>
 #include <newleaf/events/app_event.h>
+#include <newleaf/scene/scene_manager.h>
 #include <newleaf/utils/time.h>
 #include <newleaf/window/windows_manager.h>
 

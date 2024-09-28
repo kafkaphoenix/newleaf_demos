@@ -6,6 +6,8 @@
 #include <newleaf/components/meta/cUUID.h>
 #include <newleaf/components/physics/cTransform.h>
 #include <newleaf/components/world/cTime.h>
+#include <newleaf/graphics/render_manager.h>
+#include <newleaf/scene/scene_manager.h>
 
 #include "components/config/CCoins.h"
 
@@ -25,24 +27,24 @@ CoinsSystem::~CoinsSystem() {
 void CoinsSystem::init(entt::registry& registry) {
   auto& app = nl::Application::get();
   auto& scene_manager = app.get_scene_manager();
-  auto& render_manager = app.get_render_manager();
 
   entt::entity game_state = registry.view<CCoins, nl::CUUID>().front();
   CCoins& coins_config = registry.get<CCoins>(game_state);
 
   for (uint32_t i = 0; i < coins_config.max_coins; i++) {
-    entt::entity coin_ = scene_manager.create_entity(
-      "scene", "coin", "coin_" + std::to_string(i));
+    entt::entity coin_ =
+      scene_manager.create_entity("scene", "coin", "coin_" + std::to_string(i));
     registry.get<nl::CShaderProgram>(coin_).visible = false;
     registry.get<nl::CTransform>(coin_).position.x = 2.f;
   }
   coins_config.coins = coins_config.max_coins;
 
-  render_manager.reorder();
+  app.get_render_manager().reorder();
 }
 
 void CoinsSystem::update(entt::registry& registry, const nl::Time& ts) {
-  if (nl::Application::get().is_paused()) {
+  auto& app = nl::Application::get();
+  if (app.is_paused()) {
     return;
   }
 
@@ -68,8 +70,7 @@ void CoinsSystem::update(entt::registry& registry, const nl::Time& ts) {
             cShaderProgram.visible = false;
           }
         } else {
-          auto e = nl::Application::get().get_scene_manager().get_entity(
-            "game_state");
+          auto e = app.get_scene_manager().get_entity("game_state");
           nl::CTime& cTime = registry.get<nl::CTime>(e);
           if (coins_config.coins > 0 and cTime.current_second % 2 == 0 and
               delay2 == 0) {

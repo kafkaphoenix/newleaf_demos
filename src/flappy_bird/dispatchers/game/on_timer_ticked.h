@@ -13,15 +13,15 @@
 namespace fb {
 
 inline void on_timer_ticked(entt::registry& registry) {
+  auto& app = nl::Application::get();
   entt::entity game_state = registry.view<CTimer, nl::CUUID>().front();
   CTimer& timer = registry.get<CTimer>(game_state);
   int left = --timer.left;
   if (timer.max_time - left == 3) {
-    nl::Application::get().get_windows_manager().trigger_event(
-      nl::AppUpdateEvent("on_ready"));
+    app.get_windows_manager().trigger_event(nl::AppUpdateEvent("on_ready"));
   }
   if (left < 0) {
-    nl::Application::get().get_windows_manager().trigger_event(
+    app.get_windows_manager().trigger_event(
       nl::AppUpdateEvent("on_level_completed"));
   } else {
     registry.view<nl::CTextureAtlas, nl::CName, nl::CUUID>().each(

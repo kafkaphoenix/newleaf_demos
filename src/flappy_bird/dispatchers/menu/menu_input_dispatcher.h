@@ -15,8 +15,7 @@ inline bool onMenuKeyPressed(nl::KeyPressedEvent& e) {
     return false;
 
   if (e.get_key() == nl::Key::Enter) {
-    nl::Application::get().get_states_manager().push_state(
-      GameState::create());
+    nl::Application::get().get_states_manager().push_state(GameState::create());
     return true;
   }
 

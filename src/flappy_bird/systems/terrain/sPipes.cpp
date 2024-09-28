@@ -8,6 +8,8 @@
 #include <newleaf/components/meta/cUUID.h>
 #include <newleaf/components/physics/cTransform.h>
 #include <newleaf/components/world/cTime.h>
+#include <newleaf/graphics/render_manager.h>
+#include <newleaf/scene/scene_manager.h>
 
 #include "components/config/cPipes.h"
 
@@ -69,7 +71,8 @@ void PipesSystem::init(entt::registry& registry) {
 }
 
 void PipesSystem::update(entt::registry& registry, const nl::Time& ts) {
-  if (nl::Application::get().is_paused()) {
+  auto& app = nl::Application::get();
+  if (app.is_paused()) {
     return;
   }
 
@@ -97,8 +100,7 @@ void PipesSystem::update(entt::registry& registry, const nl::Time& ts) {
             cShaderProgram.visible = false;
           }
         } else {
-          auto e = nl::Application::get().get_scene_manager().get_entity(
-            "game_state");
+          auto e = app.get_scene_manager().get_entity("game_state");
           nl::CTime& cTime = registry.get<nl::CTime>(e);
           if (pipes_config.pipes > 0 and cTime.current_second % 3 == 0 and
               delay == 0) {

@@ -4,8 +4,8 @@
 #include <newleaf/components/graphics/cShaderProgram.h>
 #include <newleaf/components/graphics/cTextureAtlas.h>
 #include <newleaf/components/physics/cTransform.h>
+#include <newleaf/graphics/render_manager.h>
 #include <newleaf/scene/scene_manager.h>
-#include <newleaf/state/states_manager.h>
 
 #include "systems/items/sCoins.h"
 #include "systems/meta/sScore.h"
@@ -22,7 +22,7 @@ ReadyOverlay::ReadyOverlay() : Layer("ready_overlay") {}
 void ReadyOverlay::on_attach() {
   auto& app = nl::Application::get();
   auto& scene_manager = app.get_scene_manager();
-  auto& registry = app.get_scene_manager().get_registry();
+  auto& registry = scene_manager.get_registry();
 
   auto bird = scene_manager.get_entity("bird");
   registry.get<nl::CShaderProgram>(bird).visible = true;
@@ -43,7 +43,8 @@ void ReadyOverlay::on_attach() {
 void ReadyOverlay::on_detach() {
   auto& app = nl::Application::get();
   auto& scene_manager = app.get_scene_manager();
-  auto& registry = app.get_scene_manager().get_registry();
+  auto& registry = scene_manager.get_registry();
+
   entt::entity getReady = scene_manager.get_entity("ready");
   registry.get<nl::CShaderProgram>(getReady).visible = false;
   entt::entity countdown = scene_manager.get_entity("countdown");

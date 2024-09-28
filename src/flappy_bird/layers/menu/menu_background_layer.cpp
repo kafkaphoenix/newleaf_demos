@@ -28,7 +28,7 @@ void MenuBackgroundLayer::on_attach() {
 void MenuBackgroundLayer::on_detach() {
   auto& app = nl::Application::get();
   auto& scene_manager = app.get_scene_manager();
-  auto& registry = app.get_scene_manager().get_registry();
+  auto& registry = scene_manager.get_registry();
 
   auto bird = scene_manager.get_entity("bird");
   registry.get<nl::CShaderProgram>(bird).visible = false;

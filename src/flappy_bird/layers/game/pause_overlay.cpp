@@ -16,7 +16,7 @@ PauseOverlay::PauseOverlay() : Layer("pause_overlay") {}
 void PauseOverlay::on_attach() {
   auto& app = nl::Application::get();
   auto& scene_manager = app.get_scene_manager();
-  auto& registry = app.get_scene_manager().get_registry();
+  auto& registry = scene_manager.get_registry();
 
   app.pause(true);
 
@@ -42,7 +42,7 @@ void PauseOverlay::on_attach() {
 void PauseOverlay::on_detach() {
   auto& app = nl::Application::get();
   auto& scene_manager = app.get_scene_manager();
-  auto& registry = app.get_scene_manager().get_registry();
+  auto& registry = scene_manager.get_registry();
 
   // For when we unpause the game
   auto bird = scene_manager.get_entity("bird");

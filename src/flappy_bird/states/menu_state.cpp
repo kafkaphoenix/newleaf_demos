@@ -20,28 +20,24 @@ namespace fb {
 MenuState::MenuState() : State("menu_state") {
   auto& app = nl::Application::get();
   const auto& settings_manager = app.get_settings_manager();
-  auto& scene_manager = app.get_scene_manager();
 
   // TODO move to loading screen state
-  scene_manager.create_scene(settings_manager.active_scene,
-                              settings_manager.active_scene_path);
+  app.get_scene_manager().create_scene(settings_manager.active_scene,
+                                       settings_manager.active_scene_path);
 }
 
 void MenuState::on_attach() {
   auto& app = nl::Application::get();
-  auto& scene_manager = app.get_scene_manager();
-  auto& states_manager = nl::Application::get().get_states_manager();
-  states_manager.push_layer(MenuBackgroundLayer::create());
+  app.get_states_manager().push_layer(MenuBackgroundLayer::create());
   m_layers_manager->push_layer(MenuButtonsLayer::create());
-  nl::Application::get().get_scene_manager().register_system(
+  app.get_scene_manager().register_system(
     "render_system", std::make_unique<nl::RenderSystem>(100));
 }
 
 void MenuState::on_detach() {
   auto& app = nl::Application::get();
   auto& scene_manager = app.get_scene_manager();
-  auto& states_manager = nl::Application::get().get_states_manager();
-  auto& registry = app.get_scene_manager().get_registry();
+  auto& registry = scene_manager.get_registry();
 
   registry.view<nl::CShaderProgram, nl::CTransform, nl::CName, nl::CUUID>()
     .each([&](nl::CShaderProgram& cShaderProgram, nl::CTransform& cTransform,
@@ -55,7 +51,7 @@ void MenuState::on_detach() {
       }
     });
 
-  states_manager.get_current_state().get_layers_manager().clear();
+  app.get_states_manager().get_current_state().get_layers_manager().clear();
   scene_manager.unregister_system("render_system");
 }
 

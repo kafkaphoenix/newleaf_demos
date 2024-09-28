@@ -23,22 +23,24 @@ inline bool on_window_minimized(nl::WindowMinimizedEvent& e) { return true; }
 inline bool on_window_maximized(nl::WindowMaximizedEvent& e) { return true; }
 
 inline bool on_window_focused(nl::WindowFocusEvent& e) {
-  nl::Application::get().minimize(false);
-  if (nl::Application::get().should_restore_pause()) {
-    nl::Application::get().pause(true);
-    nl::Application::get().restore_pause(false);
+  auto& app = nl::Application::get();
+  app.minimize(false);
+  if (app.should_restore_pause()) {
+    app.pause(true);
+    app.restore_pause(false);
   } else {
-    nl::Application::get().pause(false);
+    app.pause(false);
   }
   return true;
 }
 
 inline bool on_window_unfocused(nl::WindowLostFocusEvent& e) {
-  nl::Application::get().minimize(true);
-  if (nl::Application::get().is_paused()) {
-    nl::Application::get().restore_pause(true);
+  auto& app = nl::Application::get();
+  app.minimize(true);
+  if (app.is_paused()) {
+    app.restore_pause(true);
   } else {
-    nl::Application::get().pause(true);
+    app.pause(true);
   }
   return true;
 }

@@ -13,7 +13,7 @@ MenuButtonsLayer::MenuButtonsLayer() : Layer("menu_buttons_layer") {}
 void MenuButtonsLayer::on_attach() {
   auto& app = nl::Application::get();
   auto& scene_manager = app.get_scene_manager();
-  auto& registry = app.get_scene_manager().get_registry();
+  auto& registry = scene_manager.get_registry();
 
   auto start = scene_manager.get_entity("start");
   registry.get<nl::CShaderProgram>(start).visible = true;
@@ -25,7 +25,7 @@ void MenuButtonsLayer::on_attach() {
 void MenuButtonsLayer::on_detach() {
   auto& app = nl::Application::get();
   auto& scene_manager = app.get_scene_manager();
-  auto& registry = app.get_scene_manager().get_registry();
+  auto& registry = scene_manager.get_registry();
 
   auto start = scene_manager.get_entity("start");
   registry.get<nl::CShaderProgram>(start).visible = false;

@@ -16,7 +16,7 @@ GameoverOverlay::GameoverOverlay() : Layer("gameover_overlay") {}
 void GameoverOverlay::on_attach() {
   auto& app = nl::Application::get();
   auto& scene_manager = app.get_scene_manager();
-  auto& registry = app.get_scene_manager().get_registry();
+  auto& registry = scene_manager.get_registry();
 
   app.pause(true);
 
@@ -36,7 +36,7 @@ void GameoverOverlay::on_attach() {
 void GameoverOverlay::on_detach() {
   auto& app = nl::Application::get();
   auto& scene_manager = app.get_scene_manager();
-  auto& registry = app.get_scene_manager().get_registry();
+  auto& registry = scene_manager.get_registry();
 
   auto gameover = scene_manager.get_entity("gameover");
   registry.get<nl::CShaderProgram>(gameover).visible = false;

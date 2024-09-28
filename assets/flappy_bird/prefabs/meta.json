@@ -1,0 +1,18 @@
+{
+    "camera": {
+        "ctags": ["active_camera"],
+        "components": {
+            "camera": {
+                "type": "perspective",
+                "aspect_ratio": "16:9",
+                "mode": "2d"
+            },
+            "transform": {
+                "position": {"x": 0, "y": 0, "z": 1}
+            }
+        }
+    },
+    "game_state": {
+        "ctags": ["coins", "pipes", "score", "timer", "time"]
+    }
+}

@@ -34,6 +34,15 @@ class FlappyBird : public nl::Application {
 
 nl::Application* nl::create(nl::CLArgs&& args) {
   auto settings_manager = load_settings("FlappyBird");
+
+  settings_manager->app_name = "FlappyBird";
+  settings_manager->window_icon_path = "assets/common/app_icon.png";
+  settings_manager->cursor_icon_path = "assets/common/cursor.png";
+  settings_manager->default_texture_path = "assets/common/default.png";
+  settings_manager->active_scene = "root";
+  settings_manager->active_scene_path =
+    "assets/flappy_bird/scenes/root_scene.json";
+
   LogManager::set_engine_logger_level(settings_manager->engine_log_level);
   LogManager::set_engine_logger_flush_level(
     settings_manager->engine_flush_level);

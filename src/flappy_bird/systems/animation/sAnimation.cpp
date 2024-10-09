@@ -18,8 +18,7 @@ static bool rotate = true;
 namespace fb {
 
 void AnimationSystem::update(entt::registry& registry, const nl::Time& ts) {
-  auto& app = nl::Application::get();
-  if (app.is_paused()) {
+  if (nl::Application::get().is_paused()) {
     return;
   }
 

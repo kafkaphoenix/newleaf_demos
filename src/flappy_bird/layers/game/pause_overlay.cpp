@@ -3,6 +3,9 @@
 #include <newleaf/application/application.h>
 #include <newleaf/assets/assets_manager.h>
 #include <newleaf/components/graphics/cShaderProgram.h>
+#include <newleaf/components/graphics/cTexture.h>
+#include <newleaf/components/graphics/cTextureAtlas.h>
+#include <newleaf/components/physics/cTransform.h>
 #include <newleaf/scene/scene_manager.h>
 #include <newleaf/settings/settings_manager.h>
 #include <newleaf/state/states_manager.h>
@@ -24,19 +27,23 @@ void PauseOverlay::on_attach() {
   registry.get<nl::CShaderProgram>(bird).visible = false;
 
   // auto overlay = scene_manager.get_entity("overlay"); // TODO transparency
-  // not working registry.get<nl::CShaderProgram>(overlay).visible = true;
+  // not working
 
-  auto paused = scene_manager.get_entity("paused");
-  registry.get<nl::CShaderProgram>(paused).visible = true;
+  auto paused = scene_manager.create_entity("scene", "text", "paused");
+  registry.get<nl::CTexture>(paused).reload_textures({"paused"});
 
-  auto resume = scene_manager.get_entity("resume");
-  registry.get<nl::CShaderProgram>(resume).visible = true;
+  auto resume = scene_manager.create_entity("scene", "buttons", "resume");
+  registry.get<nl::CTextureAtlas>(resume).index = 4;
 
-  auto restart = scene_manager.get_entity("restart");
-  registry.get<nl::CShaderProgram>(restart).visible = true;
+  auto restart = scene_manager.create_entity("scene", "buttons", "restart");
+  registry.get<nl::CTransform>(restart).position.y = -0.2;
+  registry.get<nl::CTextureAtlas>(restart).index = 3;
 
-  auto menu = scene_manager.get_entity("menu");
-  registry.get<nl::CShaderProgram>(menu).visible = true;
+  auto menu = scene_manager.create_entity("scene", "buttons", "menu");
+  registry.get<nl::CTransform>(menu).position.y = -0.4;
+  registry.get<nl::CTextureAtlas>(menu).index = 8;
+
+  app.get_render_manager().reorder();
 }
 
 void PauseOverlay::on_detach() {
@@ -49,16 +56,16 @@ void PauseOverlay::on_detach() {
   registry.get<nl::CShaderProgram>(bird).visible = true;
 
   auto paused = scene_manager.get_entity("paused");
-  registry.get<nl::CShaderProgram>(paused).visible = false;
+  scene_manager.delete_entity(paused);
 
   auto resume = scene_manager.get_entity("resume");
-  registry.get<nl::CShaderProgram>(resume).visible = false;
+  scene_manager.delete_entity(resume);
 
   auto restart = scene_manager.get_entity("restart");
-  registry.get<nl::CShaderProgram>(restart).visible = false;
+  scene_manager.delete_entity(restart);
 
   auto menu = scene_manager.get_entity("menu");
-  registry.get<nl::CShaderProgram>(menu).visible = false;
+  scene_manager.delete_entity(menu);
 
   app.pause(false);
 }

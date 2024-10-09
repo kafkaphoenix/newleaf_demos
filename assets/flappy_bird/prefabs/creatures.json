@@ -3,7 +3,7 @@
         "ctags": ["active_input", "transform"],
         "components": {
             "shader_program": {
-                "name": "shape"
+                "name": "camera"
             },
             "shape": {
                 "type": "rectangle",

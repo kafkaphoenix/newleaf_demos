@@ -29,34 +29,43 @@ GameState::GameState() : State("game_state") {}
 void GameState::on_attach() {
   auto& app = nl::Application::get();
   auto& scene_manager = app.get_scene_manager();
+  auto& registry = scene_manager.get_registry();
   auto& states_manager = app.get_states_manager();
-
-  scene_manager.register_system("delete_system",
-                                std::make_unique<nl::DeleteSystem>(-100));
-  scene_manager.register_system("render_system",
-                                std::make_unique<nl::RenderSystem>(100));
 
   states_manager.push_layer(GameLayer::create());
   states_manager.push_overlay(ReadyOverlay::create(), true);
   states_manager.push_overlay(PauseOverlay::create(), false);
   states_manager.push_overlay(CompletedOverlay::create(), false);
   states_manager.push_overlay(GameoverOverlay::create(), false);
+
+  scene_manager.register_system("delete_system",
+                                std::make_unique<nl::DeleteSystem>(-100));
+  scene_manager.register_system("render_system",
+                                std::make_unique<nl::RenderSystem>(100));
   scene_manager.register_system("time_system",
                                 std::make_unique<nl::TimeSystem>(0));
   scene_manager.register_system("animation_system",
                                 std::make_unique<AnimationSystem>(7));
   // TODO background system priority 3
+
+  scene_manager.create_entity("meta", "game_state", "game_state");
 }
 
 void GameState::on_detach() {
   auto& app = nl::Application::get();
+  auto& scene_manager = app.get_scene_manager();
 
   APP_INFO("saving settings...");
   nl::save_settings(app.get_settings_manager(),
                     nl::get_default_roaming_path("FlappyBird"));
 
-  // TODO clear entities from systems and time?
-  app.get_scene_manager().clear_systems();
+  app.get_states_manager().get_current_state().clear_layers();
+
+  // TODO clear entities from systems and time? should be done in themselves
+  scene_manager.clear_systems();
+
+  auto game_state = scene_manager.get_entity("game_state");
+  scene_manager.delete_entity(game_state);
 }
 
 void GameState::on_update(const nl::Time& ts) {
@@ -86,8 +95,7 @@ void GameState::on_update(const nl::Time& ts) {
 }
 
 void GameState::on_event(nl::Event& e) {
-  auto& app = nl::Application::get();
-  auto& registry = app.get_scene_manager().get_registry();
+  auto& registry = nl::Application::get().get_scene_manager().get_registry();
 
   window_dispatcher(e, registry);
   input_dispatcher(e, registry);

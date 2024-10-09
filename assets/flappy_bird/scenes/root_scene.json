@@ -1,9 +1,9 @@
 {
     "assets": {
         "shaders": {
-            "shape": {
-                "vshape": "assets/flappy_bird/shaders/shape.vert",
-                "fshape": "assets/flappy_bird/shaders/shape.frag"
+            "camera": {
+                "vcamera": "assets/flappy_bird/shaders/camera.vert",
+                "fcamera": "assets/flappy_bird/shaders/camera.frag"
             }
         },
         "textures" : {

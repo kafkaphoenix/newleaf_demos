@@ -6,7 +6,7 @@ layout (location = 0) out vec4 frag_color;
 
 uniform sampler2D texture_diffuse_1;
 uniform float use_texture_atlas;
-uniform float num_rows;
+uniform float rows;
 uniform vec2 offset;
 uniform float use_color;
 uniform vec4 color;
@@ -15,7 +15,7 @@ void load_texture() {
     if (int(use_color) == 0) {
         vec2 offset_texture = vtexture_coords;
         if (int(use_texture_atlas) == 1) {
-            offset_texture = vtexture_coords / num_rows + offset;
+            offset_texture = vtexture_coords / rows + offset;
         }
         frag_color = texture(texture_diffuse_1, offset_texture);
     } else {

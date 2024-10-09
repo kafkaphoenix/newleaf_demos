@@ -1,7 +1,6 @@
 #include "sScore.h"
 
 #include <newleaf/application/application.h>
-#include <newleaf/components/graphics/cShaderProgram.h>
 #include <newleaf/components/graphics/cTextureAtlas.h>
 #include <newleaf/components/meta/cTag.h>
 #include <newleaf/components/meta/cUUID.h>
@@ -43,10 +42,6 @@ void ScoreSystem::init(entt::registry& registry) {
   registry.get<nl::CTextureAtlas>(centenas).index = score / 100;
   registry.get<nl::CTextureAtlas>(decenas).index = (score % 100) / 10;
   registry.get<nl::CTextureAtlas>(unidades).index = score % 10;
-
-  registry.get<nl::CShaderProgram>(unidades).visible = true;
-  registry.get<nl::CShaderProgram>(decenas).visible = true;
-  registry.get<nl::CShaderProgram>(centenas).visible = true;
 
   app.get_render_manager().reorder();
 }

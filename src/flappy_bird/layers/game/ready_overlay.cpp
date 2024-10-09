@@ -1,7 +1,7 @@
 #include "ready_overlay.h"
 
 #include <newleaf/application/application.h>
-#include <newleaf/components/graphics/cShaderProgram.h>
+#include <newleaf/components/graphics/cTexture.h>
 #include <newleaf/components/graphics/cTextureAtlas.h>
 #include <newleaf/components/physics/cTransform.h>
 #include <newleaf/graphics/render_manager.h>
@@ -24,29 +24,33 @@ void ReadyOverlay::on_attach() {
   auto& scene_manager = app.get_scene_manager();
   auto& registry = scene_manager.get_registry();
 
-  auto bird = scene_manager.get_entity("bird");
-  registry.get<nl::CShaderProgram>(bird).visible = true;
+  auto bird = scene_manager.create_entity("creatures", "bird", "bird");
   registry.get<nl::CTransform>(bird).position.y = 0.2;
 
-  auto getReady = scene_manager.get_entity("ready");
-  registry.get<nl::CShaderProgram>(getReady).visible = true;
+  auto ready = scene_manager.create_entity("scene", "text", "ready");
+  registry.get<nl::CTransform>(ready).position.y = 0.7;
+  registry.get<nl::CTexture>(ready).reload_textures({"ready"});
 
   auto countdown = scene_manager.create_entity("scene", "numbers", "countdown");
   registry.get<nl::CTextureAtlas>(countdown).index = 3;
   registry.get<nl::CTransform>(countdown).position.y = 0.45;
 
-  scene_manager.create_entity("meta", "game_state", "game_state");
+  entt::entity background_day =
+    scene_manager.create_entity("scene", "background", "background_day");
+  registry.get<nl::CTexture>(background_day)
+    .reload_textures({"background_day"});
+
+  scene_manager.create_entity("scene", "ground", "ground");
 
   app.get_render_manager().reorder();
 }
 
 void ReadyOverlay::on_detach() {
-  auto& app = nl::Application::get();
-  auto& scene_manager = app.get_scene_manager();
-  auto& registry = scene_manager.get_registry();
+  auto& scene_manager = nl::Application::get().get_scene_manager();
 
-  entt::entity getReady = scene_manager.get_entity("ready");
-  registry.get<nl::CShaderProgram>(getReady).visible = false;
+  entt::entity ready = scene_manager.get_entity("ready");
+  scene_manager.delete_entity(ready);
+
   entt::entity countdown = scene_manager.get_entity("countdown");
   scene_manager.delete_entity(countdown);
 

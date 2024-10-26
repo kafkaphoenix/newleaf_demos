@@ -29,11 +29,8 @@ void MenuButtonsLayer::on_attach() {
 void MenuButtonsLayer::on_detach() {
   auto& scene_manager = nl::Application::get().get_scene_manager();
 
-  auto start = scene_manager.get_entity("start");
-  scene_manager.delete_entity(start);
-
-  auto exit = scene_manager.get_entity("exit");
-  scene_manager.delete_entity(exit);
+  scene_manager.delete_entity("start");
+  scene_manager.delete_entity("exit");
 }
 
 void MenuButtonsLayer::on_event(nl::Event& e) { menu_input_dispatcher(e); }

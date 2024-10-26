@@ -48,12 +48,6 @@ void ReadyOverlay::on_attach() {
 void ReadyOverlay::on_detach() {
   auto& scene_manager = nl::Application::get().get_scene_manager();
 
-  entt::entity ready = scene_manager.get_entity("ready");
-  scene_manager.delete_entity(ready);
-
-  entt::entity countdown = scene_manager.get_entity("countdown");
-  scene_manager.delete_entity(countdown);
-
   scene_manager.register_system("pipes_system",
                                 std::make_unique<PipesSystem>(1));
   scene_manager.register_system("coin_system",
@@ -68,6 +62,9 @@ void ReadyOverlay::on_detach() {
                                 std::make_unique<MovementSystem>(8));
   scene_manager.register_system("score_system",
                                 std::make_unique<ScoreSystem>(9));
+
+  scene_manager.delete_entity("ready");
+  scene_manager.delete_entity("countdown");
 }
 
 void ReadyOverlay::on_event(nl::Event& e) {

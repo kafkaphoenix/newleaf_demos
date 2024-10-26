@@ -75,6 +75,8 @@ inline bool on_key_pressed(nl::KeyPressedEvent& e) {
     return true;
   } else if (e.get_key() == nl::Key::Escape) {
     // TODO move to layers for flappy bird, think about cursor first
+    // esc should close the game in menu, do nothing in loading state and show
+    // settings in game
     if (debugging) {
       windows_manager.restore_cursor();
     }

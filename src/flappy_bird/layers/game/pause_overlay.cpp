@@ -51,21 +51,13 @@ void PauseOverlay::on_detach() {
   auto& scene_manager = app.get_scene_manager();
   auto& registry = scene_manager.get_registry();
 
-  // For when we unpause the game
   auto bird = scene_manager.get_entity("bird");
   registry.get<nl::CShaderProgram>(bird).visible = true;
 
-  auto paused = scene_manager.get_entity("paused");
-  scene_manager.delete_entity(paused);
-
-  auto resume = scene_manager.get_entity("resume");
-  scene_manager.delete_entity(resume);
-
-  auto restart = scene_manager.get_entity("restart");
-  scene_manager.delete_entity(restart);
-
-  auto menu = scene_manager.get_entity("menu");
-  scene_manager.delete_entity(menu);
+  scene_manager.delete_entity("paused");
+  scene_manager.delete_entity("resume");
+  scene_manager.delete_entity("restart");
+  scene_manager.delete_entity("menu");
 
   app.pause(false);
 }

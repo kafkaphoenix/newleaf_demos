@@ -47,16 +47,10 @@ void CompletedOverlay::on_attach() {
 void CompletedOverlay::on_detach() {
   auto& app = nl::Application::get();
   auto& scene_manager = app.get_scene_manager();
-  auto& registry = scene_manager.get_registry();
 
-  auto completed = scene_manager.get_entity("completed");
-  scene_manager.delete_entity(completed);
-
-  auto restart = scene_manager.get_entity("restart");
-  scene_manager.delete_entity(restart);
-
-  auto menu = scene_manager.get_entity("menu");
-  scene_manager.delete_entity(menu);
+  scene_manager.delete_entity("completed");
+  scene_manager.delete_entity("restart");
+  scene_manager.delete_entity("menu");
 
   app.pause(false);
 }

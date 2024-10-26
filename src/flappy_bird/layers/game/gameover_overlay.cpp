@@ -45,14 +45,9 @@ void GameoverOverlay::on_detach() {
   auto& app = nl::Application::get();
   auto& scene_manager = app.get_scene_manager();
 
-  auto gameover = scene_manager.get_entity("gameover");
-  scene_manager.delete_entity(gameover);
-
-  auto restart = scene_manager.get_entity("restart");
-  scene_manager.delete_entity(restart);
-
-  auto menu = scene_manager.get_entity("menu");
-  scene_manager.delete_entity(menu);
+  scene_manager.delete_entity("gameover");
+  scene_manager.delete_entity("restart");
+  scene_manager.delete_entity("menu");
 
   app.pause(false);
 }

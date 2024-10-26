@@ -36,17 +36,10 @@ void MenuBackgroundLayer::on_attach() {
 void MenuBackgroundLayer::on_detach() {
   auto& scene_manager = nl::Application::get().get_scene_manager();
 
-  auto bird = scene_manager.get_entity("bird");
-  scene_manager.delete_entity(bird);
-
-  auto title = scene_manager.get_entity("title");
-  scene_manager.delete_entity(title);
-
-  auto background_day = scene_manager.get_entity("background_day");
-  scene_manager.delete_entity(background_day);
-
-  auto ground = scene_manager.get_entity("ground");
-  scene_manager.delete_entity(ground);
+  scene_manager.delete_entity("bird");
+  scene_manager.delete_entity("title");
+  scene_manager.delete_entity("background_day");
+  scene_manager.delete_entity("ground");
 }
 
 std::unique_ptr<nl::Layer> MenuBackgroundLayer::create() {

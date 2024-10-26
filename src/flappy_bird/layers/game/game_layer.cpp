@@ -22,14 +22,9 @@ void GameLayer::on_detach() {
   scene_manager.unregister_system("movement_system");
   scene_manager.unregister_system("time_system");
 
-  entt::entity bird = scene_manager.get_entity("bird");
-  scene_manager.delete_entity(bird);
-
-  entt::entity background_day = scene_manager.get_entity("background_day");
-  scene_manager.delete_entity(background_day);
-
-  entt::entity ground = scene_manager.get_entity("ground");
-  scene_manager.delete_entity(ground);
+  scene_manager.delete_entity("bird");
+  scene_manager.delete_entity("background_day");
+  scene_manager.delete_entity("ground");
 }
 
 void GameLayer::on_update(const nl::Time& ts) {

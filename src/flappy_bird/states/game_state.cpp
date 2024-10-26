@@ -64,8 +64,7 @@ void GameState::on_detach() {
   // TODO clear entities from systems and time? should be done in themselves
   scene_manager.clear_systems();
 
-  auto game_state = scene_manager.get_entity("game_state");
-  scene_manager.delete_entity(game_state);
+  scene_manager.delete_entity("game_state");
 }
 
 void GameState::on_update(const nl::Time& ts) {

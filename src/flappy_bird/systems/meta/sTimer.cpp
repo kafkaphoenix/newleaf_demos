@@ -1,0 +1,49 @@
+#include "sTimer.h"
+
+#include <newleaf/application/application.h>
+#include <newleaf/components/graphics/cTextureAtlas.h>
+#include <newleaf/components/meta/cTag.h>
+#include <newleaf/components/meta/cUUID.h>
+#include <newleaf/components/physics/cTransform.h>
+#include <newleaf/graphics/render_manager.h>
+#include <newleaf/scene/scene_manager.h>
+
+#include "components/meta/cTimer.h"
+
+namespace fb {
+
+TimerSystem::~TimerSystem() {
+  auto& registry = nl::Application::get().get_scene_manager().get_registry();
+  for (auto e : registry.view<nl::CTag, nl::CUUID>()) {
+    if (registry.get<nl::CTag>(e).tag == "timer") {
+      registry.destroy(e);
+    }
+  }
+}
+
+void TimerSystem::init(entt::registry& registry) {
+  auto& app = nl::Application::get();
+  auto& scene_manager = app.get_scene_manager();
+
+  entt::entity unidades =
+    scene_manager.create_entity("scene", "numbers", "timer_unidades", "timer");
+  entt::entity decenas =
+    scene_manager.create_entity("scene", "numbers", "timer_decenas", "timer");
+  entt::entity centenas =
+    scene_manager.create_entity("scene", "numbers", "timer_centenas", "timer");
+
+  registry.get<nl::CTransform>(unidades).position = {-1.3f, 0.8f, 0.f};
+  registry.get<nl::CTransform>(decenas).position = {-1.45f, 0.8f, 0.f};
+  registry.get<nl::CTransform>(centenas).position = {-1.6f, 0.8f, 0.f};
+
+  entt::entity game_state = registry.view<CTimer, nl::CUUID>().front();
+  uint32_t left = registry.get<CTimer>(game_state).left;
+
+  registry.get<nl::CTextureAtlas>(centenas).index = left / 100;
+  registry.get<nl::CTextureAtlas>(decenas).index = (left % 100) / 10;
+  registry.get<nl::CTextureAtlas>(unidades).index = left % 10;
+
+  app.get_render_manager().reorder();
+}
+
+}

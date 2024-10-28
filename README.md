@@ -1,6 +1,6 @@
 # newleaf_demos
 
-This repository contains a collection of demos that demonstrate the capabilities of the newleaf engine.
+This repository contains a collection of demos that showcase the capabilities of the [newleaf engine](https://github.com/kafkaphoenix/newleaf).
 
 ## Flappy Bird
 

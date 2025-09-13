@@ -5,7 +5,7 @@
 #include <newleaf/components/physics/cTransform.h>
 #include <newleaf/scene/scene_manager.h>
 
-#include "dispatchers/menu/menu_input_dispatcher.h"
+#include "handlers/menu/menu_input_handler.h"
 
 namespace fb {
 
@@ -33,9 +33,7 @@ void MenuButtonsLayer::on_detach() {
   scene_manager.delete_entity("exit");
 }
 
-void MenuButtonsLayer::on_event(nl::Event& e) { menu_input_dispatcher(e); }
+void MenuButtonsLayer::on_event(nl::Event& e) { menu_input_handler(e); }
 
-std::unique_ptr<nl::Layer> MenuButtonsLayer::create() {
-  return std::make_unique<MenuButtonsLayer>();
-}
+std::unique_ptr<nl::Layer> MenuButtonsLayer::create() { return std::make_unique<MenuButtonsLayer>(); }
 }

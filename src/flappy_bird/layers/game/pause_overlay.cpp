@@ -1,7 +1,6 @@
 #include "pause_overlay.h"
 
 #include <newleaf/application/application.h>
-#include <newleaf/assets/assets_manager.h>
 #include <newleaf/components/graphics/cShaderProgram.h>
 #include <newleaf/components/graphics/cTexture.h>
 #include <newleaf/components/graphics/cTextureAtlas.h>
@@ -25,9 +24,6 @@ void PauseOverlay::on_attach() {
 
   auto bird = scene_manager.get_entity("bird");
   registry.get<nl::CShaderProgram>(bird).visible = false;
-
-  // auto overlay = scene_manager.get_entity("overlay"); // TODO transparency
-  // not working
 
   auto paused = scene_manager.create_entity("scene", "text", "paused");
   registry.get<nl::CTexture>(paused).reload_textures({"paused"});
@@ -85,19 +81,11 @@ bool PauseOverlay::on_key_pressed(nl::KeyPressedEvent& e) {
     return true;
   } else if (e.get_key() == nl::Key::M) {
     app.get_states_manager().pop_state("game_state");
-    // TODO delete this and import
-    if (app.get_states_manager().get_state_index() == 0) {
-      app.get_scene_manager().clear_scene();
-      app.get_assets_manager().clear();
-      app.get_states_manager().push_state(MenuState::create());
-    }
     return true;
   }
 
   return false;
 }
 
-std::unique_ptr<nl::Layer> PauseOverlay::create() {
-  return std::make_unique<PauseOverlay>();
-}
+std::unique_ptr<nl::Layer> PauseOverlay::create() { return std::make_unique<PauseOverlay>(); }
 }

@@ -24,8 +24,7 @@ void MenuBackgroundLayer::on_attach() {
   registry.get<nl::CTransform>(title).scale = {1.0, 1.0, 1.0};
   registry.get<nl::CTexture>(title).reload_textures({"title"});
 
-  entt::entity background_day =
-    scene_manager.create_entity("scene", "background", "background_day");
+  entt::entity background_day = scene_manager.create_entity("scene", "background", "background_day");
   registry.get<nl::CTexture>(background_day).reload_textures({"background_day"});
 
   scene_manager.create_entity("scene", "ground", "ground");
@@ -42,7 +41,5 @@ void MenuBackgroundLayer::on_detach() {
   scene_manager.delete_entity("ground");
 }
 
-std::unique_ptr<nl::Layer> MenuBackgroundLayer::create() {
-  return std::make_unique<MenuBackgroundLayer>();
-}
+std::unique_ptr<nl::Layer> MenuBackgroundLayer::create() { return std::make_unique<MenuBackgroundLayer>(); }
 }

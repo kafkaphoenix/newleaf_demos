@@ -10,9 +10,9 @@
 #include "systems/items/sCoins.h"
 #include "systems/meta/sScore.h"
 #include "systems/meta/sTimer.h"
+#include "systems/physics/sBirdMovement.h"
 #include "systems/physics/sCollision.h"
 #include "systems/physics/sGravity.h"
-#include "systems/physics/sMovement.h"
 #include "systems/terrain/sPipes.h"
 
 namespace fb {
@@ -35,10 +35,8 @@ void ReadyOverlay::on_attach() {
   registry.get<nl::CTextureAtlas>(countdown).index = 3;
   registry.get<nl::CTransform>(countdown).position.y = 0.45;
 
-  entt::entity background_day =
-    scene_manager.create_entity("scene", "background", "background_day");
-  registry.get<nl::CTexture>(background_day)
-    .reload_textures({"background_day"});
+  entt::entity background_day = scene_manager.create_entity("scene", "background", "background_day");
+  registry.get<nl::CTexture>(background_day).reload_textures({"background_day"});
 
   scene_manager.create_entity("scene", "ground", "ground");
 
@@ -48,20 +46,13 @@ void ReadyOverlay::on_attach() {
 void ReadyOverlay::on_detach() {
   auto& scene_manager = nl::Application::get().get_scene_manager();
 
-  scene_manager.register_system("pipes_system",
-                                std::make_unique<PipesSystem>(1));
-  scene_manager.register_system("coin_system",
-                                std::make_unique<CoinsSystem>(2));
-  scene_manager.register_system("timer_system",
-                                std::make_unique<TimerSystem>(4));
-  scene_manager.register_system("collision_system",
-                                std::make_unique<CollisionSystem>(5));
-  scene_manager.register_system("gravity_system",
-                                std::make_unique<GravitySystem>(6));
-  scene_manager.register_system("movement_system",
-                                std::make_unique<MovementSystem>(8));
-  scene_manager.register_system("score_system",
-                                std::make_unique<ScoreSystem>(9));
+  scene_manager.register_system("pipes_system", std::make_unique<PipesSystem>(1));
+  scene_manager.register_system("coin_system", std::make_unique<CoinsSystem>(2));
+  scene_manager.register_system("timer_system", std::make_unique<TimerSystem>(4));
+  scene_manager.register_system("collision_system", std::make_unique<CollisionSystem>(5));
+  scene_manager.register_system("gravity_system", std::make_unique<GravitySystem>(6));
+  scene_manager.register_system("movement_system", std::make_unique<BirdMovementSystem>(8));
+  scene_manager.register_system("score_system", std::make_unique<ScoreSystem>(9));
 
   scene_manager.delete_entity("ready");
   scene_manager.delete_entity("countdown");
@@ -86,7 +77,5 @@ bool ReadyOverlay::on_key_pressed(nl::KeyPressedEvent& e) {
   return false;
 }
 
-std::unique_ptr<nl::Layer> ReadyOverlay::create() {
-  return std::make_unique<ReadyOverlay>();
-}
+std::unique_ptr<nl::Layer> ReadyOverlay::create() { return std::make_unique<ReadyOverlay>(); }
 }

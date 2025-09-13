@@ -25,12 +25,9 @@ void ScoreSystem::init(entt::registry& registry) {
   auto& app = nl::Application::get();
   auto& scene_manager = app.get_scene_manager();
 
-  entt::entity unidades =
-    scene_manager.create_entity("scene", "numbers", "score_unidades", "score");
-  entt::entity decenas =
-    scene_manager.create_entity("scene", "numbers", "score_decenas", "score");
-  entt::entity centenas =
-    scene_manager.create_entity("scene", "numbers", "score_centenas", "score");
+  entt::entity unidades = scene_manager.create_entity("scene", "numbers", "score_unidades", "score");
+  entt::entity decenas = scene_manager.create_entity("scene", "numbers", "score_decenas", "score");
+  entt::entity centenas = scene_manager.create_entity("scene", "numbers", "score_centenas", "score");
 
   registry.get<nl::CTransform>(unidades).position = {1.6f, 0.8f, 0.f};
   registry.get<nl::CTransform>(decenas).position = {1.45f, 0.8f, 0.f};

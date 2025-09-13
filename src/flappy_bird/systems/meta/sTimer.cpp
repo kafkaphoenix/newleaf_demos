@@ -25,12 +25,9 @@ void TimerSystem::init(entt::registry& registry) {
   auto& app = nl::Application::get();
   auto& scene_manager = app.get_scene_manager();
 
-  entt::entity unidades =
-    scene_manager.create_entity("scene", "numbers", "timer_unidades", "timer");
-  entt::entity decenas =
-    scene_manager.create_entity("scene", "numbers", "timer_decenas", "timer");
-  entt::entity centenas =
-    scene_manager.create_entity("scene", "numbers", "timer_centenas", "timer");
+  entt::entity unidades = scene_manager.create_entity("scene", "numbers", "timer_unidades", "timer");
+  entt::entity decenas = scene_manager.create_entity("scene", "numbers", "timer_decenas", "timer");
+  entt::entity centenas = scene_manager.create_entity("scene", "numbers", "timer_centenas", "timer");
 
   registry.get<nl::CTransform>(unidades).position = {-1.3f, 0.8f, 0.f};
   registry.get<nl::CTransform>(decenas).position = {-1.45f, 0.8f, 0.f};

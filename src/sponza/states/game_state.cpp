@@ -53,7 +53,7 @@ void GameState::on_detach() {
 
   // TODO: this should be UI saving icon and delete import
   APP_INFO("saving settings");
-  nl::save_settings(app.get_settings_manager(), nl::get_default_roaming_path("Sponza"));
+  nl::save_settings(app.get_settings_manager(), nl::get_default_roaming_path(app.get_name()));
 
   app.get_states_manager().clear_layers();
 

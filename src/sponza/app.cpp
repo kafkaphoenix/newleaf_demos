@@ -29,10 +29,11 @@ class Sponza : public nl::Application {
 }
 
 nl::Application* nl::create(nl::CLArgs&& args) {
-  auto settings_manager = load_settings("Sponza");
+  std::string app_name = "Sponza";
+  auto settings_manager = load_settings(app_name);
 
   // TODO this should be in the settings manager or a config file
-  settings_manager->app_name = "Sponza";
+  settings_manager->app_name = app_name;
   settings_manager->window_icon_path = "assets/common/textures/app_icon.png";
   settings_manager->cursor_icon_path = "assets/common/textures/cursor.png";
   settings_manager->default_texture_path = "assets/common/textures/default.png";
@@ -48,16 +49,16 @@ nl::Application* nl::create(nl::CLArgs&& args) {
   LogManager::toggle_app_logger(settings_manager->app_logger_enabled);
 
   if (not settings_manager->logfile_path.empty()) {
-    LogManager::create_file_logger((get_default_roaming_path("Sponza") / settings_manager->logfile_path).string());
+    LogManager::create_file_logger((get_default_roaming_path(app_name) / settings_manager->logfile_path).string());
   }
 
   if (not settings_manager->backtrace_logfile_path.empty()) {
     LogManager::create_backtrace_logger(
-      (get_default_roaming_path("Sponza") / settings_manager->backtrace_logfile_path).string(),
+      (get_default_roaming_path(app_name) / settings_manager->backtrace_logfile_path).string(),
       settings_manager->engine_backtrace_logger_enabled, settings_manager->app_backtrace_logger_enabled);
   }
 
   APP_INFO("loading settings");
-  APP_INFO("initializating Sponza application");
+  APP_INFO("initializating application: {}", settings_manager->app_name);
   return new spz::Sponza(std::move(settings_manager), std::move(args));
 }

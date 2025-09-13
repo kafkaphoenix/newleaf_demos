@@ -1,0 +1,50 @@
+{
+    "skybox": {
+        "ctags": ["transform", "skybox", "transparent"],
+        "components": {
+            "shape": {
+                "type": "cube",
+                "size": {"x": 1, "y": 1, "z": 1}
+            },
+            "rigid_body": {
+                "kinematic": true
+            },
+            "texture": {
+                "paths": ["skybox_night"]
+            },
+            "blend_texture": {
+                "path": "skybox_day"
+            },
+            "fog": {
+                "enabled": false,
+                "color": {"r": 0.45, "g": 0.55, "b": 0.6, "a": 1.0},
+                "density": 0.0035,
+                "gradient": 5,
+                "lower_limit": 0,
+                "upper_limit": 30
+            },
+            "shader_program": {
+                "name": "skybox"
+            },
+            "distance_from_camera": { "distance": 2 }
+        }
+    },
+    "fbo": {
+        "components": {
+            "fbo": {
+                "fbo": "post_process",
+                "attachment": "depth_texture",
+                "mode": "normal"
+            },
+            "shader_program": {
+                "name": "fbo"
+            },
+            "shape": {
+                "type": "rectangle"
+            }
+        }
+    },
+    "clock": {
+        "ctags": ["time"]
+    }
+}

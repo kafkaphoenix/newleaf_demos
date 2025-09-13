@@ -3,7 +3,7 @@
         "ctags": ["active_input", "transform"],
         "components": {
             "shader_program": {
-                "name": "camera"
+                "name": "sprite"
             },
             "shape": {
                 "type": "rectangle",
@@ -12,11 +12,8 @@
             "rigid_body": {
                 "kinematic": true
             },
-            "texture": {
-                "paths": ["bird"],
-                "draw_mode": "texture_atlas"
-            },
             "texture_atlas": {
+                "path": "bird",
                 "rows": 2
             },
             "distance_from_camera": {

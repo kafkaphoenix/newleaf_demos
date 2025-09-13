@@ -25,16 +25,14 @@ void CollisionSystem::update(entt::registry& registry, const nl::Time& ts) {
   const nl::CUUID& cUUID = registry.get<nl::CUUID>(bird);
   std::string_view collided_with = "";
 
-  for (auto e : registry.view<nl::CTransform, nl::CCollider, nl::CShaderProgram,
-                              nl::CTag, nl::CUUID>()) {
+  for (auto e : registry.view<nl::CTransform, nl::CCollider, nl::CShaderProgram, nl::CTag, nl::CUUID>()) {
     const nl::CTransform& cTransform2 = registry.get<nl::CTransform>(e);
     const nl::CCollider& cCollider2 = registry.get<nl::CCollider>(e);
     const nl::CTag& cTag2 = registry.get<nl::CTag>(e);
     const nl::CUUID& cUUID2 = registry.get<nl::CUUID>(e);
     const nl::CShaderProgram& cSP = registry.get<nl::CShaderProgram>(e);
     if (cUUID.uuid != cUUID2.uuid and cTag2.tag != "buttons") {
-      if (cCollider.type == nl::CCollider::Type::rectangle and
-          cCollider2.type == nl::CCollider::Type::rectangle) {
+      if (cCollider.type == nl::CCollider::Type::rectangle and cCollider2.type == nl::CCollider::Type::rectangle) {
         // TODO move logic to class physics
         float minX = cTransform.position.x - cCollider.size.x / 2;
         float maxX = cTransform.position.x + cCollider.size.x / 2;
@@ -46,8 +44,7 @@ void CollisionSystem::update(entt::registry& registry, const nl::Time& ts) {
         float minY2 = cTransform2.position.y - cCollider2.size.y / 2;
         float maxY2 = cTransform2.position.y + cCollider2.size.y / 2;
 
-        if (minX < maxX2 and maxX > minX2 and minY < maxY2 and maxY > minY2 and
-            cSP.visible) {
+        if (minX < maxX2 and maxX > minX2 and minY < maxY2 and maxY > minY2 and cSP.visible) {
           collided_with = cTag2.tag;
           if (collided_with == "coin") {
             registry.get<nl::CShaderProgram>(e).visible = false;
@@ -61,8 +58,7 @@ void CollisionSystem::update(entt::registry& registry, const nl::Time& ts) {
   if (collided_with == "pipe" or collided_with == "ground") {
     app.get_windows_manager().trigger_event(nl::AppUpdateEvent("on_death"));
   } else if (collided_with == "coin") {
-    app.get_windows_manager().trigger_event(
-      nl::AppUpdateEvent("on_coin_collected"));
+    app.get_windows_manager().trigger_event(nl::AppUpdateEvent("on_coin_collected"));
   }
 
   // top off screen check

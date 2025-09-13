@@ -1,0 +1,14 @@
+{
+    "building": {
+        "ctags": ["distance_from_camera"],
+        "components": {
+            "transform": {
+                "scale": {"x": 0.05,"y": 0.05,"z": 0.05}
+            },
+            "shader_program": {
+                "name": "model"
+            },
+            "body": "building"
+        }
+    }
+}

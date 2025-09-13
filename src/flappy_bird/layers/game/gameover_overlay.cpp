@@ -1,7 +1,6 @@
 #include "gameover_overlay.h"
 
 #include <newleaf/application/application.h>
-#include <newleaf/assets/assets_manager.h>
 #include <newleaf/components/graphics/cShaderProgram.h>
 #include <newleaf/components/graphics/cTexture.h>
 #include <newleaf/components/graphics/cTextureAtlas.h>
@@ -71,12 +70,6 @@ bool GameoverOverlay::on_key_pressed(nl::KeyPressedEvent& e) {
     return true;
   } else if (e.get_key() == nl::Key::M) {
     app.get_states_manager().pop_state("game_state");
-    // TODO delete this and import / move to game state detach?
-    if (app.get_states_manager().get_state_index() == 0) {
-      app.get_scene_manager().clear_scene();
-      app.get_assets_manager().clear();
-      app.get_states_manager().push_state(MenuState::create());
-    }
     return true;
   } else if (e.get_key() == nl::Key::P) {
     return true;
@@ -85,7 +78,5 @@ bool GameoverOverlay::on_key_pressed(nl::KeyPressedEvent& e) {
   return false;
 }
 
-std::unique_ptr<nl::Layer> GameoverOverlay::create() {
-  return std::make_unique<GameoverOverlay>();
-}
+std::unique_ptr<nl::Layer> GameoverOverlay::create() { return std::make_unique<GameoverOverlay>(); }
 }

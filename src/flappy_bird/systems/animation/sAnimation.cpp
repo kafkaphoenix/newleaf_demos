@@ -7,7 +7,7 @@
 #include <newleaf/components/physics/cRigidBody.h>
 #include <newleaf/components/physics/cTransform.h>
 
-// TODO REMOVE
+// TODO REMOVE maybe animation state component?
 static uint32_t bird_state{};
 static uint32_t coin_state{};
 static float bird_delay{};
@@ -23,8 +23,7 @@ void AnimationSystem::update(entt::registry& registry, const nl::Time& ts) {
   }
 
   registry.view<nl::CTransform, nl::CRigidBody, nl::CTag, nl::CUUID>().each(
-    [&](entt::entity e, nl::CTransform& cTransform,
-        const nl::CRigidBody& cRigidBody, const nl::CTag& cTag,
+    [&](entt::entity e, nl::CTransform& cTransform, const nl::CRigidBody& cRigidBody, const nl::CTag& cTag,
         const nl::CUUID& cUUID) {
       if (cRigidBody.kinematic) {
         if (cTag.tag == "bird") {

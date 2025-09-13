@@ -42,8 +42,7 @@ void GameLayer::on_update(const nl::Time& ts) {
     scene_manager.unregister_system("score_system");
     scene_manager.unregister_system("movement_system");
     scene_manager.unregister_system("time_system");
-    scene_manager.register_system("time_system",
-                                  std::make_unique<nl::TimeSystem>(0));
+    scene_manager.register_system("time_system", std::make_unique<nl::TimeSystem>(0));
 
     scene_manager.create_entity("meta", "camera", "scene_camera");
     scene_manager.create_entity("meta", "game_state", "game_state");
@@ -75,7 +74,5 @@ bool GameLayer::on_key_pressed(nl::KeyPressedEvent& e) {
   return false;
 }
 
-std::unique_ptr<nl::Layer> GameLayer::create() {
-  return std::make_unique<GameLayer>();
-}
+std::unique_ptr<nl::Layer> GameLayer::create() { return std::make_unique<GameLayer>(); }
 }

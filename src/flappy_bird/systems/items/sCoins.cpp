@@ -32,8 +32,7 @@ void CoinsSystem::init(entt::registry& registry) {
   CCoins& coins_config = registry.get<CCoins>(game_state);
 
   for (uint32_t i = 0; i < coins_config.max_coins; i++) {
-    entt::entity coin_ =
-      scene_manager.create_entity("scene", "coin", "coin_" + std::to_string(i));
+    entt::entity coin_ = scene_manager.create_entity("scene", "coin", "coin_" + std::to_string(i));
     registry.get<nl::CShaderProgram>(coin_).visible = false;
     registry.get<nl::CTransform>(coin_).position.x = 2.f;
   }
@@ -56,8 +55,7 @@ void CoinsSystem::update(entt::registry& registry, const nl::Time& ts) {
   }
 
   registry.view<nl::CShaderProgram, nl::CTransform, nl::CTag, nl::CUUID>().each(
-    [&](nl::CShaderProgram& cShaderProgram, nl::CTransform& cTransform,
-        const nl::CTag& cTag, const nl::CUUID& cUUID) {
+    [&](nl::CShaderProgram& cShaderProgram, nl::CTransform& cTransform, const nl::CTag& cTag, const nl::CUUID& cUUID) {
       if (cTag.tag == "coin") {
         if (cShaderProgram.visible) {
           float speed = 0.005f; // TODO move to component
@@ -72,14 +70,11 @@ void CoinsSystem::update(entt::registry& registry, const nl::Time& ts) {
         } else {
           auto e = app.get_scene_manager().get_entity("game_state");
           nl::CTime& cTime = registry.get<nl::CTime>(e);
-          if (coins_config.coins > 0 and cTime.current_second % 2 == 0 and
-              delay2 == 0) {
+          if (coins_config.coins > 0 and cTime.current_second % 2 == 0 and delay2 == 0) {
             // TODO check if there is a pipe already in the same position
             // randomize y position
             // -0.5 highest 0.6 lowest
-            cTransform.position.y =
-              -0.5f + static_cast<float>(rand()) /
-                        (static_cast<float>(RAND_MAX / 1.1f));
+            cTransform.position.y = -0.5f + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 1.1f));
             cTransform.position.x = 2.f;
             cShaderProgram.visible = true;
             coins_config.coins--;

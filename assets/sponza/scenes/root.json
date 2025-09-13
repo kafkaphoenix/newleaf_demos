@@ -1,0 +1,62 @@
+{
+    "assets": {
+        "shaders": {
+            "model": {
+                "vmodel": "assets/sponza/shaders/model.vert",
+                "fmodel": "assets/sponza/shaders/model.frag"
+            },
+            "skybox": {
+                "vskybox": "assets/common/shaders/skybox.vert",
+                "fskybox": "assets/common/shaders/skybox.frag"
+            },
+            "fbo": {
+                "vfbo": "assets/common/shaders/fbo.vert",
+                "ffbo": "assets/common/shaders/fbo.frag"
+            }
+        },
+        "models" : {
+            "building": "assets/sponza/models/sponza/sponza.gltf",
+            "player": "assets/common/models/player/player.obj"
+        },
+        "prefabs": {
+            "structures": {
+                "path": "assets/sponza/prefabs/structures.json",
+                "target_prototypes": [
+                    "building"
+                ]
+            },
+            "creatures": {
+                "path": "assets/sponza/prefabs/creatures.json",
+                "target_prototypes": [
+                    "creature",
+                    "player"
+                ]
+            },
+            "systems": {
+                "path": "assets/common/prefabs/systems.json",
+                "target_prototypes": [
+                    "skybox",
+                    "fbo",
+                    "clock"
+                ]
+            }
+        },
+        "textures" : {
+            "skybox_day": {
+                "path": "assets/common/textures/skybox_day",
+                "type": "texture_diffuse",
+                "flip_vertically": false
+            },
+            "skybox_night": {
+                "path": "assets/common/textures/skybox_night",
+                "type": "texture_diffuse",
+                "flip_vertically": false
+            },
+            "default": {
+                "path": "assets/common/textures/default.png",
+                "type": "texture_diffuse",
+                "flip_vertically": false
+            }
+        }
+    }
+}

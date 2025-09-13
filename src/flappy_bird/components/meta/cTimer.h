@@ -15,9 +15,7 @@ struct CTimer {
     CTimer() = default;
     explicit CTimer(uint32_t t, uint32_t l) : max_time(t), left(l) {}
 
-    void print() const {
-      APP_BACKTRACE("\t\tmax_time: {0}\n\t\t\t\t\t\tleft: {1}", max_time, left);
-    }
+    void print() const { APP_BACKTRACE("\t\tmax_time: {0}\n\t\t\t\t\t\tleft: {1}", max_time, left); }
 
     std::map<std::string, std::string, nl::NumericComparator> to_map() const {
       std::map<std::string, std::string, nl::NumericComparator> info;

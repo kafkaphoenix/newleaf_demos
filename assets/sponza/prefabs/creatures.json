@@ -1,0 +1,29 @@
+{    
+    "creature": {
+        "ctags": ["transform"]
+    },
+    "player": {
+        "inherits": ["creature"],
+        "ctags": ["active_camera", "active_input"],
+        "components": {
+            "transform": {
+                "position": {"x": 0, "y": 5, "z": 0}
+            },
+            "body": "player",
+            "camera": {
+                "type": "perspective",
+                "aspect_ratio": "16:9",
+                "fov": 90,
+                "mode": "3d"
+            },
+            "input": {
+                "mode": "3d",
+                "translation_speed": 40,
+                "vertical_speed": 50
+            },
+            "rigid_body": {
+                "kinematic": true
+            }
+        }
+    }
+}

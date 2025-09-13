@@ -14,8 +14,8 @@ void GravitySystem::update(entt::registry& registry, const nl::Time& ts) {
   }
 
   registry.view<nl::CTransform, nl::CRigidBody, nl::CGravity, nl::CUUID>().each(
-    [&](nl::CTransform& cTransform, const nl::CRigidBody& cRigidBody,
-        const nl::CGravity& cGravity, const nl::CUUID& cUUID) {
+    [&](nl::CTransform& cTransform, const nl::CRigidBody& cRigidBody, const nl::CGravity& cGravity,
+        const nl::CUUID& cUUID) {
       if (cRigidBody.kinematic) {
         cTransform.position.y -= cGravity.acceleration * ts;
       }

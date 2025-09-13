@@ -15,9 +15,12 @@
                 "value": "x64"
             },
             "cacheVariables": {
+                "TARGET_DEMO": "sponza",
+                "CMAKE_CXX_STANDARD": "23",
+                "CMAKE_CXX_STANDARD_REQUIRED": "ON",
+                "CMAKE_CXX_EXTENSIONS": "OFF",
                 "CMAKE_TOOLCHAIN_FILE": "C:/vcpkg/scripts/buildsystems/vcpkg.cmake",
-                "CMAKE_CXX_COMPILER": "C:/Program Files/Microsoft Visual Studio/2022/Preview/VC/Tools/MSVC/14.41.34120/bin/Hostx64/x64/cl.exe",
-                "TARGET_DEMO": "flappy_bird"
+                "CMAKE_CXX_COMPILER": "C:/Program Files/Microsoft Visual Studio/2022/Preview/VC/Tools/MSVC/14.41.34120/bin/Hostx64/x64/cl.exe"
             }
         },
         {

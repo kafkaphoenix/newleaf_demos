@@ -2,9 +2,9 @@
 
 #include <newleaf/application/application.h>
 #include <newleaf/assets/assets_manager.h>
+#include <newleaf/components/graphics/cShape.h>
 #include <newleaf/components/graphics/cTexture.h>
 #include <newleaf/components/graphics/cTextureAtlas.h>
-#include <newleaf/components/graphics/cShape.h>
 #include <newleaf/components/physics/cTransform.h>
 #include <newleaf/scene/scene_manager.h>
 #include <newleaf/settings/settings_manager.h>
@@ -74,12 +74,6 @@ bool CompletedOverlay::on_key_pressed(nl::KeyPressedEvent& e) {
     return true;
   } else if (e.get_key() == nl::Key::M) {
     app.get_states_manager().pop_state("game_state");
-    // TODO delete this and import
-    if (app.get_states_manager().get_state_index() == 0) {
-      app.get_scene_manager().clear_scene();
-      app.get_assets_manager().clear();
-      app.get_states_manager().push_state(MenuState::create());
-    }
     return true;
   } else if (e.get_key() == nl::Key::P) {
     return true;
@@ -88,7 +82,5 @@ bool CompletedOverlay::on_key_pressed(nl::KeyPressedEvent& e) {
   return false;
 }
 
-std::unique_ptr<nl::Layer> CompletedOverlay::create() {
-  return std::make_unique<CompletedOverlay>();
-}
+std::unique_ptr<nl::Layer> CompletedOverlay::create() { return std::make_unique<CompletedOverlay>(); }
 }

@@ -15,10 +15,7 @@ struct CCoins {
     CCoins() = default;
     explicit CCoins(uint32_t mp, uint32_t p) : max_coins(mp), coins(p) {}
 
-    void print() const {
-      APP_BACKTRACE("\t\tmax_coins: {0}\n\t\t\t\t\t\tcoins: {1}", max_coins,
-                    coins);
-    }
+    void print() const { APP_BACKTRACE("\t\tmax_coins: {0}\n\t\t\t\t\t\tcoins: {1}", max_coins, coins); }
 
     std::map<std::string, std::string, nl::NumericComparator> to_map() const {
       std::map<std::string, std::string, nl::NumericComparator> info;

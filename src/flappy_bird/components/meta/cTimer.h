@@ -1,5 +1,6 @@
 #pragma once
 
+#include <algorithm>
 #include <map>
 #include <string>
 
@@ -13,7 +14,7 @@ struct CTimer {
     uint32_t left{20};
 
     CTimer() = default;
-    explicit CTimer(uint32_t t, uint32_t l) : max_time(t), left(l) {}
+    explicit CTimer(uint32_t t, uint32_t l) : max_time(t), left(std::min(l, t)) {}
 
     void print() const { APP_BACKTRACE("\t\tmax_time: {0}\n\t\t\t\t\t\tleft: {1}", max_time, left); }
 

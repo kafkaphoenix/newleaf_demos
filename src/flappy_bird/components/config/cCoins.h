@@ -1,5 +1,6 @@
 #pragma once
 
+#include <algorithm>
 #include <map>
 #include <string>
 
@@ -13,7 +14,7 @@ struct CCoins {
     uint32_t coins{};
 
     CCoins() = default;
-    explicit CCoins(uint32_t mp, uint32_t p) : max_coins(mp), coins(p) {}
+    explicit CCoins(uint32_t mp, uint32_t p) : max_coins(mp), coins(std::min(p, mp)) {}
 
     void print() const { APP_BACKTRACE("\t\tmax_coins: {0}\n\t\t\t\t\t\tcoins: {1}", max_coins, coins); }
 

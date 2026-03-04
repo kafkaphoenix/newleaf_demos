@@ -20,7 +20,7 @@ void register_components() {
     .data<&CCoins::coins>("coins"_hs)
     .func<&CCoins::print>("print"_hs)
     .func<&CCoins::to_map>("to_map"_hs)
-    .func<&nl::assign<CCoins>, entt::as_ref_t>("assign"_hs);
+    .func<&nl::assign<CCoins>>("assign"_hs);
 
   entt::meta<CPipes>()
     .type("pipes"_hs)
@@ -29,7 +29,7 @@ void register_components() {
     .data<&CPipes::pipes>("pipes"_hs)
     .func<&CPipes::print>("print"_hs)
     .func<&CPipes::to_map>("to_map"_hs)
-    .func<&nl::assign<CPipes>, entt::as_ref_t>("assign"_hs);
+    .func<&nl::assign<CPipes>>("assign"_hs);
 
   entt::meta<CScore>()
     .type("score"_hs)
@@ -37,7 +37,7 @@ void register_components() {
     .data<&CScore::score>("score"_hs)
     .func<&CScore::print>("print"_hs)
     .func<&CScore::to_map>("to_map"_hs)
-    .func<&nl::assign<CScore>, entt::as_ref_t>("assign"_hs);
+    .func<&nl::assign<CScore>>("assign"_hs);
 
   entt::meta<CTimer>()
     .type("timer"_hs)
@@ -46,6 +46,6 @@ void register_components() {
     .data<&CTimer::left>("left"_hs)
     .func<&CTimer::print>("print"_hs)
     .func<&CTimer::to_map>("to_map"_hs)
-    .func<&nl::assign<CTimer>, entt::as_ref_t>("assign"_hs);
+    .func<&nl::assign<CTimer>>("assign"_hs);
 }
 }

@@ -1,5 +1,6 @@
 #pragma once
 
+#include <algorithm>
 #include <map>
 #include <string>
 
@@ -13,7 +14,7 @@ struct CPipes {
     uint32_t pipes{0};
 
     CPipes() = default;
-    explicit CPipes(uint32_t mp, uint32_t p) : max_pipes(mp), pipes(p) {}
+    explicit CPipes(uint32_t mp, uint32_t p) : max_pipes(mp), pipes(std::min(p, mp)) {}
 
     void print() const { APP_BACKTRACE("\t\tmax_pipes: {0}\n\t\t\t\t\t\tpipes: {1}", max_pipes, pipes); }
 

@@ -2,12 +2,10 @@
     "assets": {
         "shaders": {
             "sprite": {
-                "vsprite": "assets/flappy_bird/shaders/sprite.vert",
-                "fsprite": "assets/flappy_bird/shaders/sprite.frag"
+                "path": "assets/flappy_bird/shaders/sprite"
             },
             "texture": {
-                "vtexture": "assets/flappy_bird/shaders/texture.vert",
-                "ftexture": "assets/flappy_bird/shaders/texture.frag"
+                "path": "assets/flappy_bird/shaders/texture"
             }
         },
         "textures" : {

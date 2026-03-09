@@ -23,7 +23,7 @@
                 "lower_limit": 0,
                 "upper_limit": 30
             },
-            "shader_program": {
+            "shader": {
                 "name": "skybox"
             },
             "distance_from_camera": { "distance": 2 }
@@ -36,7 +36,7 @@
                 "attachment": "depth_texture",
                 "mode": "normal"
             },
-            "shader_program": {
+            "shader": {
                 "name": "fbo"
             },
             "shape": {

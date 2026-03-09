@@ -2,21 +2,24 @@
     "assets": {
         "shaders": {
             "model": {
-                "vmodel": "assets/sponza/shaders/model.vert",
-                "fmodel": "assets/sponza/shaders/model.frag"
+                "path": "assets/sponza/shaders/model"
             },
             "skybox": {
-                "vskybox": "assets/common/shaders/skybox.vert",
-                "fskybox": "assets/common/shaders/skybox.frag"
+                "path": "assets/common/shaders/skybox"
             },
             "fbo": {
-                "vfbo": "assets/common/shaders/fbo.vert",
-                "ffbo": "assets/common/shaders/fbo.frag"
+                "path": "assets/common/shaders/fbo"
             }
         },
         "models" : {
-            "building": "assets/sponza/models/sponza/sponza.gltf",
-            "player": "assets/common/models/player/player.obj"
+            "building": {
+                "path": "assets/sponza/models/sponza/sponza.gltf",
+                "shader_path": "assets/sponza/shaders/model"
+            },
+            "player": {
+                "path": "assets/common/models/player/player.obj",
+                "shader_path": "assets/sponza/shaders/model"
+            }
         },
         "prefabs": {
             "structures": {

@@ -12,9 +12,9 @@ class ReadyOverlay : public nl::Layer {
   public:
     ReadyOverlay();
 
-    virtual void on_attach() override final;
-    virtual void on_detach() override final;
-    virtual void on_event(nl::Event& e) override final;
+    void on_attach() override final;
+    void on_detach() override final;
+    void on_event(nl::Event& e) override final;
 
     static std::unique_ptr<nl::Layer> create();
 

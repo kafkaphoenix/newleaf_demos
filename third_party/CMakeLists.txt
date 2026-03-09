@@ -2,7 +2,7 @@ include(FetchContent)
 FetchContent_Declare(
     newleaf
     GIT_REPOSITORY https://github.com/kafkaphoenix/newleaf.git
-    GIT_TAG        v0.3.0
+    GIT_TAG        a3bdee2ffa4053a7e695c7b9cc1eb2e6dc77ceb8
 )
 
 FetchContent_MakeAvailable(newleaf)

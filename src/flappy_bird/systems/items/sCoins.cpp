@@ -1,7 +1,7 @@
 #include "sCoins.h"
 
 #include <newleaf/application/application.h>
-#include <newleaf/components/graphics/cShaderProgram.h>
+#include <newleaf/components/graphics/CShader.h>
 #include <newleaf/components/meta/cTag.h>
 #include <newleaf/components/meta/cUUID.h>
 #include <newleaf/components/physics/cTransform.h>
@@ -33,7 +33,7 @@ void CoinsSystem::init(entt::registry& registry) {
 
   for (uint32_t i = 0; i < coins_config.max_coins; i++) {
     entt::entity coin_ = scene_manager.create_entity("scene", "coin", "coin_" + std::to_string(i));
-    registry.get<nl::CShaderProgram>(coin_).visible = false;
+    registry.get<nl::CShader>(coin_).visible = false;
     registry.get<nl::CTransform>(coin_).position.x = 2.f;
   }
   coins_config.coins = coins_config.max_coins;
@@ -54,10 +54,10 @@ void CoinsSystem::update(entt::registry& registry, const nl::Time& ts) {
     coins_config.coins = coins_config.max_coins;
   }
 
-  registry.view<nl::CShaderProgram, nl::CTransform, nl::CTag, nl::CUUID>().each(
-    [&](nl::CShaderProgram& cShaderProgram, nl::CTransform& cTransform, const nl::CTag& cTag, const nl::CUUID& cUUID) {
+  registry.view<nl::CShader, nl::CTransform, nl::CTag, nl::CUUID>().each(
+    [&](nl::CShader& CShader, nl::CTransform& cTransform, const nl::CTag& cTag, const nl::CUUID& cUUID) {
       if (cTag.tag == "coin") {
-        if (cShaderProgram.visible) {
+        if (CShader.visible) {
           float speed = 0.005f; // TODO move to component
 
           // move coin
@@ -65,7 +65,7 @@ void CoinsSystem::update(entt::registry& registry, const nl::Time& ts) {
 
           // check if coin is out of screen
           if (cTransform.position.x < -2.f) {
-            cShaderProgram.visible = false;
+            CShader.visible = false;
           }
         } else {
           auto e = app.get_scene_manager().get_entity("game_state");
@@ -76,7 +76,7 @@ void CoinsSystem::update(entt::registry& registry, const nl::Time& ts) {
             // -0.5 highest 0.6 lowest
             cTransform.position.y = -0.5f + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 1.1f));
             cTransform.position.x = 2.f;
-            cShaderProgram.visible = true;
+            CShader.visible = true;
             coins_config.coins--;
             delay2 += 20;
           } else {

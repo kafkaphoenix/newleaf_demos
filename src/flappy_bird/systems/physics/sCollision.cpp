@@ -1,7 +1,7 @@
 #include "sCollision.h"
 
 #include <newleaf/application/application.h>
-#include <newleaf/components/graphics/cShaderProgram.h>
+#include <newleaf/components/graphics/CShader.h>
 #include <newleaf/components/meta/cTag.h>
 #include <newleaf/components/meta/cUUID.h>
 #include <newleaf/components/physics/cCollider.h>
@@ -25,12 +25,12 @@ void CollisionSystem::update(entt::registry& registry, const nl::Time& ts) {
   const nl::CUUID& cUUID = registry.get<nl::CUUID>(bird);
   std::string_view collided_with = "";
 
-  for (auto e : registry.view<nl::CTransform, nl::CCollider, nl::CShaderProgram, nl::CTag, nl::CUUID>()) {
+  for (auto e : registry.view<nl::CTransform, nl::CCollider, nl::CShader, nl::CTag, nl::CUUID>()) {
     const nl::CTransform& cTransform2 = registry.get<nl::CTransform>(e);
     const nl::CCollider& cCollider2 = registry.get<nl::CCollider>(e);
     const nl::CTag& cTag2 = registry.get<nl::CTag>(e);
     const nl::CUUID& cUUID2 = registry.get<nl::CUUID>(e);
-    const nl::CShaderProgram& cSP = registry.get<nl::CShaderProgram>(e);
+    const nl::CShader& cSP = registry.get<nl::CShader>(e);
     if (cUUID.uuid != cUUID2.uuid and cTag2.tag != "buttons") {
       if (cCollider.type == nl::CCollider::Type::rectangle and cCollider2.type == nl::CCollider::Type::rectangle) {
         // TODO move logic to class physics
@@ -47,7 +47,7 @@ void CollisionSystem::update(entt::registry& registry, const nl::Time& ts) {
         if (minX < maxX2 and maxX > minX2 and minY < maxY2 and maxY > minY2 and cSP.visible) {
           collided_with = cTag2.tag;
           if (collided_with == "coin") {
-            registry.get<nl::CShaderProgram>(e).visible = false;
+            registry.get<nl::CShader>(e).visible = false;
           }
           break;
         }

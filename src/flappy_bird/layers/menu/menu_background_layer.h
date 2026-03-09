@@ -10,8 +10,8 @@ class MenuBackgroundLayer : public nl::Layer {
   public:
     MenuBackgroundLayer();
 
-    virtual void on_attach() override final;
-    virtual void on_detach() override final;
+    void on_attach() override final;
+    void on_detach() override final;
 
     static std::unique_ptr<nl::Layer> create();
 };

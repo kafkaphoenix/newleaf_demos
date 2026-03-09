@@ -1,7 +1,7 @@
 #include "pause_overlay.h"
 
 #include <newleaf/application/application.h>
-#include <newleaf/components/graphics/cShaderProgram.h>
+#include <newleaf/components/graphics/CShader.h>
 #include <newleaf/components/graphics/cTexture.h>
 #include <newleaf/components/graphics/cTextureAtlas.h>
 #include <newleaf/components/physics/cTransform.h>
@@ -23,7 +23,7 @@ void PauseOverlay::on_attach() {
   app.pause(true);
 
   auto bird = scene_manager.get_entity("bird");
-  registry.get<nl::CShaderProgram>(bird).visible = false;
+  registry.get<nl::CShader>(bird).visible = false;
 
   auto paused = scene_manager.create_entity("scene", "text", "paused");
   registry.get<nl::CTexture>(paused).reload_textures({"paused"});
@@ -48,7 +48,7 @@ void PauseOverlay::on_detach() {
   auto& registry = scene_manager.get_registry();
 
   auto bird = scene_manager.get_entity("bird");
-  registry.get<nl::CShaderProgram>(bird).visible = true;
+  registry.get<nl::CShader>(bird).visible = true;
 
   scene_manager.delete_entity("paused");
   scene_manager.delete_entity("resume");

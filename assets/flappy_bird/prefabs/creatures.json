@@ -2,7 +2,7 @@
     "bird": {
         "ctags": ["active_input", "transform"],
         "components": {
-            "shader_program": {
+            "shader": {
                 "name": "sprite"
             },
             "shape": {

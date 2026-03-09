@@ -1,7 +1,7 @@
 #include "gameover_overlay.h"
 
 #include <newleaf/application/application.h>
-#include <newleaf/components/graphics/cShaderProgram.h>
+#include <newleaf/components/graphics/CShader.h>
 #include <newleaf/components/graphics/cTexture.h>
 #include <newleaf/components/graphics/cTextureAtlas.h>
 #include <newleaf/components/physics/cTransform.h>
@@ -23,7 +23,7 @@ void GameoverOverlay::on_attach() {
   app.pause(true);
 
   auto bird = scene_manager.get_entity("bird");
-  registry.get<nl::CShaderProgram>(bird).visible = false;
+  registry.get<nl::CShader>(bird).visible = false;
 
   auto gameover = scene_manager.create_entity("scene", "text", "gameover");
   registry.get<nl::CTransform>(gameover).position.y = 0.3;

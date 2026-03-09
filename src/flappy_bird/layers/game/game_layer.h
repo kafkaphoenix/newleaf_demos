@@ -13,9 +13,9 @@ class GameLayer : public nl::Layer {
   public:
     GameLayer();
 
-    virtual void on_detach() override final;
-    virtual void on_update(const nl::Time& ts) override final;
-    virtual void on_event(nl::Event& e) override final;
+    void on_detach() override final;
+    void on_update(const nl::Time& ts) override final;
+    void on_event(nl::Event& e) override final;
 
     static std::unique_ptr<nl::Layer> create();
 

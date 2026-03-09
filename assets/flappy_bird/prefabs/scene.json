@@ -2,7 +2,7 @@
     "sprite": {
         "ctags": ["transform", "texture_atlas"],
         "components": {
-            "shader_program": {
+            "shader": {
                 "name": "sprite"
             },
             "shape": {
@@ -13,7 +13,7 @@
     "background": {
         "ctags": ["texture"],
         "components": {
-            "shader_program": {
+            "shader": {
                 "name": "texture"
             },
             "distance_from_camera": {
@@ -31,7 +31,7 @@
     "ground": {
         "ctags": ["rigid_body"],
         "components": {
-            "shader_program": {
+            "shader": {
                 "name": "texture"
             },
             "distance_from_camera": {
@@ -56,7 +56,7 @@
     "pipe": {
         "ctags": ["texture", "rigid_body", "transform"],
         "components": {
-            "shader_program": {
+            "shader": {
                 "name": "texture"
             },
             "distance_from_camera": {
@@ -109,7 +109,7 @@
     "text": {
         "ctags": ["texture"],
         "components": {
-            "shader_program": {
+            "shader": {
                 "name": "texture"
             },
             "shape": {

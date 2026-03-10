@@ -20,10 +20,9 @@ class Sponza : public nl::Application {
       nl::RenderAPI::set_clear_color(m_settings_manager->clear_color);
       APP_TRACE("loading initial state");
       m_states_manager->push_state(GameState::create());
-      APP_TRACE("state loaded");
     }
 
-    ~Sponza() override final { APP_WARN("stopping Sponza application"); }
+    ~Sponza() override final { APP_TRACE("stopping application"); }
 };
 
 }
@@ -58,7 +57,6 @@ nl::Application* nl::create(nl::CLArgs&& args) {
       settings_manager->engine_backtrace_logger_enabled, settings_manager->app_backtrace_logger_enabled);
   }
 
-  APP_INFO("loading settings");
-  APP_INFO("initializating application: {}", settings_manager->app_name);
+  APP_TRACE("initializating application: {}", settings_manager->app_name);
   return new spz::Sponza(std::move(settings_manager), std::move(args));
 }

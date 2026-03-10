@@ -58,7 +58,7 @@ void GameState::on_detach() {
   auto& scene_manager = app.get_scene_manager();
 
   // TODO this should be ui and remove import
-  APP_INFO("saving settings");
+  APP_TRACE("saving settings");
   nl::save_settings(app.get_settings_manager(), nl::get_default_roaming_path("FlappyBird"));
 
   app.get_states_manager().clear_layers();

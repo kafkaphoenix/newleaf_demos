@@ -23,10 +23,9 @@ class FlappyBird : public nl::Application {
       register_components();
       APP_TRACE("loading initial state");
       m_states_manager->push_state(MenuState::create());
-      APP_TRACE("state loaded");
     }
 
-    ~FlappyBird() override { APP_WARN("stopping Flappy Bird application"); }
+    ~FlappyBird() override { APP_TRACE("stopping application"); }
 };
 
 }
@@ -60,7 +59,6 @@ nl::Application* nl::create(nl::CLArgs&& args) {
       settings_manager->engine_backtrace_logger_enabled, settings_manager->app_backtrace_logger_enabled);
   }
 
-  APP_INFO("loading settings");
-  APP_INFO("initializating Flappy Bird application");
+  APP_TRACE("initializating application: {}", settings_manager->app_name);
   return new fb::FlappyBird(std::move(settings_manager), std::move(args));
 }

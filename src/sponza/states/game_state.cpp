@@ -52,7 +52,7 @@ void GameState::on_detach() {
   auto& scene_manager = app.get_scene_manager();
 
   // TODO: this should be UI saving icon and delete import
-  APP_INFO("saving settings");
+  APP_TRACE("saving settings");
   nl::save_settings(app.get_settings_manager(), nl::get_default_roaming_path(app.get_name()));
 
   app.get_states_manager().clear_layers();

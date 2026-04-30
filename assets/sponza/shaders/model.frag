@@ -11,10 +11,8 @@ layout(location = 6) in vec4 world_normal;
 layout(location = 0) out vec4 frag_color;
 
 // TEXTURES
-uniform sampler2D texture_diffuse_1;
-uniform sampler2D texture_specular_1;
-uniform sampler2D texture_normal_1;
-uniform sampler2D texture_height_1;
+uniform sampler2D u_base_color;
+uniform sampler2D u_normal_map;
 // TODO rethink this uniform
 uniform bool normal_enabled;
 // COLOR
@@ -27,11 +25,13 @@ uniform float blend_texture_factor;
 uniform bool blend_color_enabled;
 uniform vec4 blend_color;
 uniform float blend_color_factor;
+
 // MATERIAL
-uniform vec3 ambient;
-uniform vec3 diffuse;
-uniform vec3 specular;
-uniform float shininess;
+uniform vec4 u_base_color_factor;
+uniform vec3 u_emissive_factor;
+uniform float u_metallic_factor;
+uniform float u_roughness_factor;
+uniform float u_alpha_cutoff;
 // FOG
 uniform vec4 fog_color;
 // LIGHTING
@@ -54,9 +54,9 @@ uniform float blend_skybox_factor;
 
 void calculate_color() {
   if (normal_enabled) {
-    frag_color = texture(texture_normal_1, vtexture_coords);
+    frag_color = texture(u_normal_map, vtexture_coords);
   } else {
-    frag_color = texture(texture_diffuse_1, vtexture_coords);
+    frag_color = texture(u_base_color, vtexture_coords);
     if (color_enabled) {
       if (blend_color_enabled) {
         frag_color = mix(frag_color, blend_color, blend_color_factor);
@@ -72,7 +72,7 @@ void calculate_color() {
 }
 
 void calculate_transparency() {
-  if (frag_color.a < 0.1) {
+  if (frag_color.a < u_alpha_cutoff) {
     discard;
   }
 }
@@ -102,25 +102,25 @@ void calculate_reflection() {
 
 void calculate_fog_visibility() { frag_color = mix(frag_color, fog_color, fog_visibility); }
 
-void calculate_lighting() {
-  if (light_enabled) {
-    vec3 ambient_component = ambient * light_color * light_intensity;
-    // diffuse
-    float diffuse_factor = max(dot(normalize(surface_normal), normalize(direction_to_light)), 0.f);
-    vec3 diffuse_component = diffuse * light_color * light_intensity * diffuse_factor;
-    // specular
-    vec3 view_dir = normalize(camera_position - world_position.xyz);
-    vec3 reflect_dir = reflect(-normalize(direction_to_light), normalize(surface_normal));
-    float specular_factor = pow(max(dot(view_dir, reflect_dir), 0.f), shininess);
-    vec3 specular_component = specular * light_color * light_intensity * specular_factor;
-    frag_color += vec4(ambient_component + diffuse_component + specular_component, 1.0);
-  }
-}
+// void calculate_lighting() {
+//   if (light_enabled) {
+//     vec3 ambient_component = ambient * light_color * light_intensity;
+//     // diffuse
+//     float diffuse_factor = max(dot(normalize(surface_normal), normalize(direction_to_light)), 0.f);
+//     vec3 diffuse_component = diffuse * light_color * light_intensity * diffuse_factor;
+//     // specular
+//     vec3 view_dir = normalize(camera_position - world_position.xyz);
+//     vec3 reflect_dir = reflect(-normalize(direction_to_light), normalize(surface_normal));
+//     float specular_factor = pow(max(dot(view_dir, reflect_dir), 0.f), shininess);
+//     vec3 specular_component = specular * light_color * light_intensity * specular_factor;
+//     frag_color += vec4(ambient_component + diffuse_component + specular_component, 1.0);
+//   }
+// }
 
 void main() {
   calculate_color();
   calculate_transparency();
   calculate_reflection();
-  calculate_lighting();
+  // calculate_lighting();
   calculate_fog_visibility();
 }

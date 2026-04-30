@@ -24,7 +24,7 @@
                 "upper_limit": 30
             },
             "shader": {
-                "name": "skybox"
+                "id": "skybox"
             },
             "distance_from_camera": { "distance": 2 }
         }
@@ -32,12 +32,12 @@
     "fbo": {
         "components": {
             "fbo": {
-                "fbo": "post_process",
+                "id": "post_process",
                 "attachment": "depth_texture",
                 "mode": "normal"
             },
             "shader": {
-                "name": "fbo"
+                "id": "fbo"
             },
             "shape": {
                 "type": "rectangle"

@@ -44,6 +44,10 @@ void ReadyOverlay::on_attach() {
 }
 
 void ReadyOverlay::on_detach() {
+  // TODO when closing the app with escape we shouldn't register
+  // if (not nl::Application::get().is_running())
+  //   return; doesnt work maybe a pending to close state? or each state managing esc?
+
   auto& scene_manager = nl::Application::get().get_scene_manager();
 
   scene_manager.register_system("pipes_system", std::make_unique<PipesSystem>(1));

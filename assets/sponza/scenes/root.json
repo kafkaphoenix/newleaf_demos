@@ -14,11 +14,11 @@
         "models" : {
             "building": {
                 "path": "assets/sponza/models/sponza/sponza.gltf",
-                "shader_path": "assets/sponza/shaders/model"
+                "shader_id": "model"
             },
             "player": {
                 "path": "assets/common/models/player/player.obj",
-                "shader_path": "assets/sponza/shaders/model"
+                "shader_id": "model"
             }
         },
         "prefabs": {

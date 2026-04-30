@@ -3,7 +3,7 @@
         "ctags": ["active_input", "transform"],
         "components": {
             "shader": {
-                "name": "sprite"
+                "id": "sprite"
             },
             "shape": {
                 "type": "rectangle",

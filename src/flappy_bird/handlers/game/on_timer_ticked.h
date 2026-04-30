@@ -25,13 +25,13 @@ inline void on_timer_ticked(entt::registry& registry) {
   } else {
     registry.view<nl::CTextureAtlas, nl::CName, nl::CUUID>().each(
       [&](entt::entity e, nl::CTextureAtlas& cTextureAtlas, const nl::CName& cName, const nl::CUUID& cUUID) {
-        if (cName.name == "timer_unidades") {
+        if (cName.id == "timer_unidades") {
           cTextureAtlas.index = left % 10;
-        } else if (cName.name == "timer_decenas") {
+        } else if (cName.id == "timer_decenas") {
           cTextureAtlas.index = (left % 100) / 10;
-        } else if (cName.name == "timer_centenas") {
+        } else if (cName.id == "timer_centenas") {
           cTextureAtlas.index = left / 100;
-        } else if (cName.name == "countdown") {
+        } else if (cName.id == "countdown") {
           cTextureAtlas.index -= 1;
         }
       });

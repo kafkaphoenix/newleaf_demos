@@ -6,7 +6,7 @@
                 "scale": {"x": 0.05,"y": 0.05,"z": 0.05}
             },
             "shader": {
-                "name": "model"
+                "id": "model"
             },
             "body": "building"
         }

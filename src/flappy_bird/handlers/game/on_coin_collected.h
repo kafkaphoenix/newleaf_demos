@@ -15,11 +15,11 @@ inline void on_coin_collected(entt::registry& registry) {
   int new_score = ++score.score;
   registry.view<nl::CTextureAtlas, nl::CName, nl::CUUID>().each(
     [&](nl::CTextureAtlas& cTextureAtlas, const nl::CName& cName, const nl::CUUID& cUUID) {
-      if (cName.name == "score_unidades") {
+      if (cName.id == "score_unidades") {
         cTextureAtlas.index = new_score % 10;
-      } else if (cName.name == "score_decenas") {
+      } else if (cName.id == "score_decenas") {
         cTextureAtlas.index = (new_score % 100) / 10;
-      } else if (cName.name == "score_centenas") {
+      } else if (cName.id == "score_centenas") {
         cTextureAtlas.index = new_score / 100;
       }
     });

@@ -54,8 +54,8 @@ inline bool on_window_resized(nl::WindowResizeEvent& e, entt::registry& registry
   if (not render_manager.get_framebuffers().empty()) {
     entt::entity fbo = registry.view<nl::CFBO, nl::CUUID>().front(); // TODO: support more than one? like mirrors
     nl::CFBO& cfbo = registry.get<nl::CFBO>(fbo);
-    render_manager.delete_framebuffer(cfbo.fbo);
-    render_manager.add_framebuffer(std::string(cfbo.fbo), e.get_width(), e.get_height(), cfbo.attachment);
+    render_manager.delete_framebuffer(cfbo.id);
+    render_manager.add_framebuffer(std::string(cfbo.id), e.get_width(), e.get_height(), cfbo.attachment);
   }
 
   return true;

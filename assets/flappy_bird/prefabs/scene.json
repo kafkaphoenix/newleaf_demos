@@ -3,7 +3,7 @@
         "ctags": ["transform", "texture_atlas"],
         "components": {
             "shader": {
-                "name": "sprite"
+                "id": "sprite"
             },
             "shape": {
                 "type": "rectangle"
@@ -14,7 +14,7 @@
         "ctags": ["texture"],
         "components": {
             "shader": {
-                "name": "texture"
+                "id": "texture"
             },
             "distance_from_camera": {
                 "distance": 5
@@ -32,7 +32,7 @@
         "ctags": ["rigid_body"],
         "components": {
             "shader": {
-                "name": "texture"
+                "id": "texture"
             },
             "distance_from_camera": {
                 "distance": 3
@@ -57,7 +57,7 @@
         "ctags": ["texture", "rigid_body", "transform"],
         "components": {
             "shader": {
-                "name": "texture"
+                "id": "texture"
             },
             "distance_from_camera": {
                 "distance": 4
@@ -110,7 +110,7 @@
         "ctags": ["texture"],
         "components": {
             "shader": {
-                "name": "texture"
+                "id": "texture"
             },
             "shape": {
                 "type": "rectangle",

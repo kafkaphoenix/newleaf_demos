@@ -99,10 +99,10 @@ void PipesSystem::update(entt::registry& registry, const nl::Time& ts) {
           nl::CTime& cTime = registry.get<nl::CTime>(e);
           if (pipes_config.pipes > 0 and cTime.current_second % 3 == 0 and delay == 0) {
             // randomize y position
-            if (cName.name.ends_with("top")) { //
+            if (cName.id.ends_with("top")) { //
               // -0.6 shortest -0.1 longest
               cTransform.position.y = -0.6f + static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 0.5f));
-            } else if (cName.name.ends_with("bottom")) {
+            } else if (cName.id.ends_with("bottom")) {
               // 1.2 shortest 0.7 longest
               cTransform.position.y = 1.2f - static_cast<float>(rand()) / (static_cast<float>(RAND_MAX / 0.5f));
             }
